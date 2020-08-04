@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadatak_1.ViewModel
 {
-    class AddManagerViewModel
+    class AddManagerViewModel : ViewModelBase
     {
     }
 }

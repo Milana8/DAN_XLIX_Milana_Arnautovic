@@ -9,14 +9,14 @@
     <Grid>
 
         <Button  Name="btnAddManager" Content="Add Manager" Width="90" Height="20"
-                Command="{Binding AddCommandManager, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="21,49,682.6,351"/>
-        <Button Name="btnAddEmployee" Content="Edit Employee" Width="90" Height="20"
-                Command="{Binding AddCommandEmployee, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="21,99,682.6,301"/>
+                Command="{Binding AddCommandManager, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="10,10,693.6,390"/>
+        <Button Name="btnAddEmployee" Content="Add Employee" Width="90" Height="20"
+                Command="{Binding AddCommandEmployee, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="10,52,693.6,348"/>
         <Button Content="Close"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Width="90"
-                Margin="629,344,0,0"
+                Margin="672,379,0,0"
                 Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DAN_XLIXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelFloor" Type="Int32" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Citizenship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Engagment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblEmploy__UserI__3D5E1FD2" FromRole="tblEmployees" ToRole="tblUsers" />
+    <NavigationProperty Name="tblAbsences" Relationship="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6" FromRole="tblEmployee" ToRole="tblAbsence" />
+  </EntityType>
+  <EntityType Name="tblManager">
+    <Key>
+      <PropertyRef Name="ManagerID" />
+    </Key>
+    <Property Name="ManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelFloor" Type="Int32" Nullable="false" />
+    <Property Name="Exprience" Type="Int32" Nullable="false" />
+    <Property Name="Qualifications" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblManage__UserI__3E52440B" FromRole="tblManagers" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__UserI__3D5E1FD2" FromRole="tblUsers" ToRole="tblEmployees" />
+    <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__UserI__3E52440B" FromRole="tblUsers" ToRole="tblManagers" />
+  </EntityType>
+  <Association Name="FK__tblEmploy__UserI__3D5E1FD2">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblEmployees">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblManage__UserI__3E52440B">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblManagers">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DAN_XLIXEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK__tblEmploy__UserI__3D5E1FD2" Association="Self.FK__tblEmploy__UserI__3D5E1FD2">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblEmployees" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblManage__UserI__3E52440B" Association="Self.FK__tblManage__UserI__3E52440B">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblManagers" EntitySet="tblManagers" />
+    </AssociationSet>
+    <EntitySet Name="tblAbsences" EntityType="DAN_XLIXModel.tblAbsence" />
+    <AssociationSet Name="FK__tblAbsenc__Emplo__412EB0B6" Association="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblAbsence" EntitySet="tblAbsences" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblAbsence">
+    <Key>
+      <PropertyRef Name="AbsenceID" />
+    </Key>
+    <Property Name="AbsenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstDay" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDay" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Reason" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StatusRequest" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="tblEmployee" Relationship="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6" FromRole="tblAbsence" ToRole="tblEmployee" />
+  </EntityType>
+  <Association Name="FK__tblAbsenc__Emplo__412EB0B6">
+    <End Type="DAN_XLIXModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+    <End Type="DAN_XLIXModel.tblAbsence" Role="tblAbsence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="tblAbsence">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

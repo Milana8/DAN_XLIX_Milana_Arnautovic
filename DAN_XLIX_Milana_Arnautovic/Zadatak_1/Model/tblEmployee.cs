@@ -14,6 +14,12 @@ namespace Zadatak_1.Model
     
     public partial class tblEmployee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblEmployee()
+        {
+            this.tblAbsences = new HashSet<tblAbsence>();
+        }
+    
         public int EmployeeID { get; set; }
         public int HotelFloor { get; set; }
         public string Gender { get; set; }
@@ -23,5 +29,7 @@ namespace Zadatak_1.Model
         public Nullable<int> UserID { get; set; }
     
         public virtual tblUser tblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAbsence> tblAbsences { get; set; }
     }
 }

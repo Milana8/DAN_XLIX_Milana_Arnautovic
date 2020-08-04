@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DAN_XLIXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DAN_XLIXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAbsence">
+          <Key>
+            <PropertyRef Name="AbsenceID" />
+          </Key>
+          <Property Name="AbsenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstDay" Type="date" Nullable="false" />
+          <Property Name="LastDay" Type="date" Nullable="false" />
+          <Property Name="Reason" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StatusRequest" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" />
+        </EntityType>
         <EntityType Name="tblEmployees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -38,7 +49,19 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pasword" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblEmploy__UserI__3D5E1FD2">
+        <Association Name="FK__tblAbsenc__Emplo__412EB0B6">
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="0..1" />
+          <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__UserI__3F466844">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -50,7 +73,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__UserI__3E52440B">
+        <Association Name="FK__tblManage__UserI__403A8C7D">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -63,20 +86,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DAN_XLIXModelStoreContainer">
+          <EntitySet Name="tblAbsence" EntityType="Self.tblAbsence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblEmploy__UserI__3D5E1FD2" Association="Self.FK__tblEmploy__UserI__3D5E1FD2">
+          <AssociationSet Name="FK__tblAbsenc__Emplo__412EB0B6" Association="Self.FK__tblAbsenc__Emplo__412EB0B6">
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="tblAbsence" EntitySet="tblAbsence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__UserI__3F466844" Association="Self.FK__tblEmploy__UserI__3F466844">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblEmployees" EntitySet="tblEmployees" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__UserI__3E52440B" Association="Self.FK__tblManage__UserI__3E52440B">
+          <AssociationSet Name="FK__tblManage__UserI__403A8C7D" Association="Self.FK__tblManage__UserI__403A8C7D">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DAN_XLIXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -92,6 +119,7 @@
           <Property Name="Salary" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" />
           <NavigationProperty Name="tblUser" Relationship="Self.FK__tblEmploy__UserI__3D5E1FD2" FromRole="tblEmployees" ToRole="tblUsers" />
+          <NavigationProperty Name="tblAbsences" Relationship="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6" FromRole="tblEmployee" ToRole="tblAbsence" />
         </EntityType>
         <EntityType Name="tblManager">
           <Key>
@@ -153,7 +181,36 @@
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
+          <EntitySet Name="tblAbsences" EntityType="DAN_XLIXModel.tblAbsence" />
+          <AssociationSet Name="FK__tblAbsenc__Emplo__412EB0B6" Association="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblAbsence" EntitySet="tblAbsences" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tblAbsence">
+          <Key>
+            <PropertyRef Name="AbsenceID" />
+          </Key>
+          <Property Name="AbsenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusRequest" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <NavigationProperty Name="tblEmployee" Relationship="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6" FromRole="tblAbsence" ToRole="tblEmployee" />
+        </EntityType>
+        <Association Name="FK__tblAbsenc__Emplo__412EB0B6">
+          <End Type="DAN_XLIXModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+          <End Type="DAN_XLIXModel.tblAbsence" Role="tblAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="tblAbsence">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -193,6 +250,18 @@
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAbsences">
+            <EntityTypeMapping TypeName="DAN_XLIXModel.tblAbsence">
+              <MappingFragment StoreEntitySet="tblAbsence">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StatusRequest" ColumnName="StatusRequest" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="LastDay" ColumnName="LastDay" />
+                <ScalarProperty Name="FirstDay" ColumnName="FirstDay" />
+                <ScalarProperty Name="AbsenceID" ColumnName="AbsenceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

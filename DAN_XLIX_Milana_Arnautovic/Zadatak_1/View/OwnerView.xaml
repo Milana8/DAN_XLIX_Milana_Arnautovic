@@ -1,0 +1,23 @@
+﻿<Window x:Class="Zadatak_1.View.OwnerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="OwnerView" Height="450" Width="800">
+    <Grid>
+
+        <Button  Name="btnAddManager" Content="Add Manager" Width="90" Height="20"
+                Command="{Binding AddCommandManager, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="21,49,682.6,351"/>
+        <Button Name="btnAddEmployee" Content="Edit Employee" Width="90" Height="20"
+                Command="{Binding AddCommandEmployee, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="21,99,682.6,301"/>
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="90"
+                Margin="629,344,0,0"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+
+</Window>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Korisnik\Desktop\DAN_XLIX_Milana_Arnautovic\DAN_XLIX_Milana_Arnautovic\Zadatak_1\App.xaml
-2-268177722
+5410641251
 2-328630743
-191934405395
+27-1281680305
 18-1391932624
-MainWindow.xaml;View\LoginView.xaml;
+MainWindow.xaml;View\AddEmployeeView.xaml;View\AddManagerView.xaml;View\LoginView.xaml;View\OwnerView.xaml;
 
 False
 

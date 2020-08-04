@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c921af4da6d642ab8cfeda5ad005fa15" Name="Diagram1">
+        <EntityTypeShape EntityType="DAN_XLIXModel.tblEmployee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAN_XLIXModel.tblManager" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAN_XLIXModel.tblUser" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="DAN_XLIXModel.FK__tblEmploy__UserI__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DAN_XLIXModel.FK__tblManage__UserI__3E52440B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DAN_XLIXModel.tblAbsence" Width="1.5" PointX="5.25" PointY="1.375" />
+        <AssociationConnector Association="DAN_XLIXModel.FK__tblAbsenc__Emplo__412EB0B6" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
